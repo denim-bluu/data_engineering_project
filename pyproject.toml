@@ -1,0 +1,28 @@
+[project]
+name = "data_engineering_project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Joon Kang", email = "joonkang@monzo.com"},
+]
+dependencies = [
+    "pandas>=2.1.1",
+    "prefect>=2.13.2",
+    "prefect-sqlalchemy>=0.2.4",
+    "protobuf>=4.24.3",
+    "pyarrow>=13.0.0",
+    "psycopg2-binary>=2.9.7",
+    "prefect-gcp>=0.4.7",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.4.2",
+]

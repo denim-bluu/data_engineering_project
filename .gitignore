@@ -2,3 +2,4 @@ ny_taxi_postgres_data/*
 output.csv.gz
 .DS_Store
 .ipynb_checkpoints/*
+data/*
