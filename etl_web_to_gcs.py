@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import pandas as pd
 from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
@@ -16,8 +17,6 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 
     print(f"Data dimension: {df.shape}")
 
-    df = df.dropna()
-    df = df.drop_duplicates()
     return df
 
 
@@ -29,10 +28,12 @@ def write_local(df: pd.DataFrame, colour: str, dataset_file: str) -> Path:
     df.to_parquet(out_path, compression="gzip")
     return out_path
 
+
 @task()
-def write_gcs(path:Path) -> None:
+def write_gcs(path: Path) -> None:
     gcp_cloud_storage_bucket_block = GcsBucket.load("data-engineering")
     gcp_cloud_storage_bucket_block.upload_from_path(from_path=path, to_path=path)
+
 
 @flow(name="Main ETL Flow")
 def etl_web_to_gcs() -> None:
